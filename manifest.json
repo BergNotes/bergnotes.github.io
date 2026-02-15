@@ -1,0 +1,21 @@
+{
+  "short_name": "BergNotes",
+  "name": "BergNotes",
+  "description": "Uma plataforma para a criação de documentos simples",
+  "icons": [
+    {
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

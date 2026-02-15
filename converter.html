@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BergNotes</title>
+    <link rel="stylesheet" href="style_main.css">
+    <link rel="icon" href="logo.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="Escreva equações matemáticas facilmente com BergNotes.">
+</head>
+<style>
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #0f172a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+}
+
+p {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 300px;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    resize: vertical;
+    font-size: 16px;
+    background: #1e293b;
+    color: white;
+}
+.comandos{
+    margin-top:50px;
+    padding:50px;
+    border:1px solid white;
+    border-radius:10px;
+}
+.c{
+    font-weight:bold;
+    color:cyan;
+}
+</style>
+<body>
+
+<div class="container">
+    <p>Insira o texto que será convertido ( expressões matemáticas )</p>
+    <textarea placeholder="Digite seu texto aqui..."></textarea>
+</div>
+
+<div class="comandos">
+        <ul>
+        <li><span class="c">\rad</span> - raíz ( √ )</li>
+        <li><span class="c">\div</span> - divisão ( ÷ )</li>
+        <li><span class="c">\uniao</span> - união de conjuntos ( ∪ ).</li>
+        <li><span class="c">\inter</span> - intersecção de conjuntos ( ∩ ).</li>
+        <li><span class="c">numero^numero</span> - potenciação.
+            Ex: 5^2 = 5²</li>
+        <li><span class="c">numerador/denominador</span> - fracção.
+            Ex: 5/10 = ⁵⁄₁₀</li>
+    </ul>
+    </div>
+<script>
+    
+    document.querySelector("textarea").addEventListener("input", function() {
+ 
+  let txt = this.value;
+
+txt = txt.replace(/\\rad\(([^)]+)\)/g, "√($1)");
+txt = txt.replace(/\\rad(\d+)/g, "√$1");
+txt = txt.replace(/\\var/g, "∆");
+txt = txt.replace(/\\div/g, "÷");
+
+// União de conjuntos
+txt = txt.replace(/\\uniao\b/g, "∪");
+
+// Interseção de conjuntos
+txt = txt.replace(/\\inter\b/g, "∩");
+
+
+
+
+  // 2️⃣ Potências com parênteses ou número simples
+  txt = txt.replace(/\^(\([^)]+\)|\d+)/g, (_, exp) => {
+    if(exp.startsWith("(") && exp.endsWith(")")) {
+      return "(" + [...exp.slice(1,-1)].map(c => sup[c]||c).join("") + ")";
+    } else {
+      return toSuperscript(exp);
+    }
+  });
+
+  // 3️⃣ Frações: (num)/(num) ou num/num
+ txt = txt.replace(/(\(?\d+\)?)[\/\\](\(?\d+\)?)/g, (_, num, den) => {
+  const n = [...num.replace(/[()]/g,"")].map(x => sup[x] || x).join("");
+  const d = [...den.replace(/[()]/g,"")].map(x => sub[x] || x).join("");
+  return n + "⁄" + d;
+});
+
+this.value = txt;
+});
+</script>
+</body>
+</html>
+
+

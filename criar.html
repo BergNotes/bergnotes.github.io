@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo.png">
+    <meta name="description" content="Uma plataforma simples para criação de livros e documentos básicos.">
+    <title>Escritura de Livros | BergNotes</title>
+</head>
+<body>
+    <div class="comandos">
+        <ul>
+        <li><span class="c">\rad</span> - raíz ( √ )</li>
+        <li><span class="c">\div</span> - divisão ( ÷ )</li>
+        <li><span class="c">\uniao</span> - união de conjuntos ( ∪ ).</li>
+        <li><span class="c">\inter</span> - intersecção de conjuntos ( ∩ ).</li>
+        <li><span class="c">numero^numero</span> - potenciação.
+            Ex: 5^2 = 5²</li>
+        <li><span class="c">numerador/denominador</span> - fracção.
+            Ex: 5/10 = ⁵⁄₁₀</li>
+    </ul>
+    </div>
+    <div id="addTitle">
+        <label id="aviso">Adicione o Texto</label>
+        <input type="text" id="titulo" placeholder="Título Aqui">
+        <button onclick="publishTitle()" class="btn">Adicionar</button>
+    </div>
+<div id="addText">
+    <span id="aviso">Adicione um texto</span>
+    
+        <textarea id="texto" rows="10" cols="500"></textarea>
+        
+        <button onclick="publishText()" class="btn">Adicionar</button>
+    </div>
+
+    <div class="tudo">
+    <div class="header">
+        <button onclick="addTitle()">Texto Forte</button>
+        <button onclick="addText()">Texto Normal</button>
+        <button id="convs">Desativar Conversão de Texto</button>
+        <button id="seeAs" style="display:none">Previsualizar</button>
+        <button onclick="ver()">Ver Comandos</button>
+        <button id="imprimir" onclick="gerar()">Imprimir</button>
+    </div>
+    <div class="concluido">
+       <h2>Impressão Concluida</h2>
+       <p>Caso queria reportar um erro, ou me contratar: <a href="https://wa.me/921257650?text=Ol%C3%A1%2C%20eu%20vim%20pelo%20teu%20site%20de%20cria%C3%A7%C3%A3o%20de%20PDF." target="_blank">fale comigo pelo Whatsapp.</a></p>
+    </div>
+<div class="container">
+    <div class="capa2">
+        <img class="capa">
+    </div>
+    <div id="capaCNT">
+        <label>
+            <span>Clique aqui para adicionar uma capa</span>
+            <input type="file" accept="image/*" name="imagem">
+        </label>
+    </div>
+
+    
+</div>
+</div>
+<script src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>
