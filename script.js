@@ -152,7 +152,7 @@ function publishText(){
     let div=document.createElement("div");
     let btn=document.createElement("img");
     btn.tabIndex=0;
-    btn.src="/images/rmv.png";
+    btn.src="rmv.png";
     btn.addEventListener("click",function(){
 this.parentElement.remove();
     });
