@@ -11,14 +11,15 @@ body{
 
 /* HEADER */
 .header{
+    
     display:flex;
     gap:10px;
     justify-content:center;
     align-items:center;
-    background:#1f3f66;
+    background: #1f3f66;
     padding:12px;
     position:sticky;
-    top:0;
+    top:64.5px;
     z-index:10;
     box-shadow:0 2px 8px rgba(0,0,0,0.2);
     
@@ -263,4 +264,24 @@ li{
     margin-left:auto;
     margin-right:auto;
     display:none;
+}
+.footer{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    padding:10px;
+    background: #1f3f66;
+    border-bottom:1px solid #2f6fb0;
+    position:sticky;
+    top:0px;
+    }
+.footer a{
+    color:white;
+    font-size:10px;
+    margin:5px;
+    font-weight:bold;
+    padding:10px;
+    border:1px solid #2f6fb0;
+    border-radius:10px;
 }

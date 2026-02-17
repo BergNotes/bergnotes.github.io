@@ -305,10 +305,11 @@ if(document.querySelector(".capa").src.length==0){
   document.querySelector("#capaCNT").style.display="none";
   
 }
+//document.querySelector("")
 await gerarPDF();
-header.style.display="none";
+//header.style.display="none";
 document.querySelector(".container").style.display="none";
-document.querySelector(".concluido").style.display="inline-block"
+document.querySelector(".concluido").style.display="flex"
 }
 
 

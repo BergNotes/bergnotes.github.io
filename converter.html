@@ -10,6 +10,28 @@
     <meta name="description" content="Escreva equações matemáticas facilmente com BergNotes.">
 </head>
 <style>
+
+.footer{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    padding:10px;
+    background: #1f3f66;
+    border-bottom:1px solid #2f6fb0;
+    width:100%;
+    position:fixed;
+    top:1px;
+    }
+.footer a{
+    color:white;
+    font-size:10px;
+    margin:5px;
+    font-weight:bold;
+    padding:10px;
+    border:1px solid #2f6fb0;
+    border-radius:10px;
+}
     * {
     box-sizing: border-box;
     margin: 0;
@@ -28,6 +50,7 @@ body {
 .container {
     width: 100%;
     max-width: 700px;
+    margin-top:50px;
 }
 
 p {
@@ -60,7 +83,11 @@ textarea {
 }
 </style>
 <body>
-
+ <div class="footer">
+            <a href="/index.html">Página Inicial</a>
+            <a href="/criar.html">Criação de Documento</a>
+            <a href="https://portfolios-pt.github.io/Raimito" target="_blank">Portal do Desenvolvedor</a>
+        </div>
 <div class="container">
     <p>Insira o texto que será convertido ( expressões matemáticas )</p>
     <textarea placeholder="Digite seu texto aqui..."></textarea>
