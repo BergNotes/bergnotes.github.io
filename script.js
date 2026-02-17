@@ -1,5 +1,6 @@
 var vT=false;
 var vT2=false;
+var vT3=false;
 var convs=true;
 var toSee=false;
 const header=document.querySelector(".header");
@@ -13,6 +14,8 @@ vT=false;
     vT=true;
     document.querySelector("#addText").style.display="none";
 vT2=false;
+document.querySelector("#addIMG").style.display="none";
+    vT3=false;
 }
 }
 
@@ -26,19 +29,18 @@ vT2=false;
     vT2=true;
     document.querySelector("#addTitle").style.display="none";
 vT=false;
+document.querySelector("#addIMG").style.display="none";
+    vT3=false;
 }
 }
 
-var vI=false;
-function addIMG(){
-    if (vI){
-document.querySelector("#addIMG").style.display="none";
-vI=false;
-    }else{
-    document.querySelector("#addIMG").style.display="flex";
-    vI=true;
+function escapeHTML(str) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
-}
+
 const sup = { "0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹" };
 const sub = { "0":"₀","1":"₁","2":"₂","3":"₃","4":"₄","5":"₅","6":"₆","7":"₇","8":"₈","9":"₉" };
 
@@ -90,8 +92,9 @@ txt = txt.replace(/\\inter\b/g, "∩");
 });
 
 this.value = txt;
+
 });
-const input=document.querySelector("input[type='file']");
+const input=document.querySelector("#imagem");
 const preview=document.querySelector(".capa");
 
 input.addEventListener("change", function() {
@@ -110,10 +113,38 @@ input.addEventListener("change", function() {
     preview.style.display = "block"; // mostra o preview
     preview.parentElement.style.display="block";
     document.querySelector("#capaCNT").style.display="none";
+    
   };
   reader.readAsDataURL(file); // lê como base64
 });
 
+function publishImage(){
+  let imagem_nova=document.createElement("img");
+  imagem_nova.classList.add("img");
+  let div=document.createElement("div");
+  let img=document.querySelector("#img").files[0];
+  let btn=document.createElement("img");
+    btn.tabIndex=0;
+    btn.src="rmv.png";
+    btn.addEventListener("click",function(){
+this.parentElement.remove();
+    });
+    btn.classList.add("rmv");
+    div.classList.add("imgBox");
+    div.appendChild(btn);
+  if (!img) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    imagem_nova.src = e.target.result; // define a imagem
+    imagem_nova.style.display = "block"; // mostra o preview
+    div.appendChild(imagem_nova);
+    document.querySelector(".container").appendChild(div);
+    
+  };
+  reader.readAsDataURL(img);
+document.querySelector("#addIMG").style.display="none";
+document.querySelector("#img").value="";
+}
 
 
 function publishTitle(){
@@ -159,7 +190,7 @@ this.parentElement.remove();
     btn.classList.add("rmv");
     div.classList.add("textBox");
     p.classList.add("text")
-    p.innerText=Title.value;
+    p.innerHTML=escapeHTML(Title.value).replace(/\\f(.*?)\\f/g, "<strong>$1</strong>");
     div.appendChild(btn);
     div.appendChild(p);
     document.querySelector(".container").appendChild(div);
@@ -219,12 +250,28 @@ async function gerarPDF() {
 
   const pdf = new jsPDF("p", "mm", "a4");
 
-  const largura = 210; 
-  const altura = (canvas.height * largura) / canvas.width;
+  const pageWidth = 210;
+  const pageHeight = 297;
 
-  pdf.addImage(imgData, "PNG", 0, 0, largura, altura);
+  const imgWidth = pageWidth;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+  let heightLeft = imgHeight;
+  let position = 0;
+
+  pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+  heightLeft -= pageHeight;
+
+  while (heightLeft > 0) {
+    position = heightLeft - imgHeight;
+    pdf.addPage();
+    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+  }
+
   pdf.save("documento.pdf");
 }
+
 
 async function gerar(){
   
@@ -235,6 +282,10 @@ document.querySelectorAll(".textBox").forEach(div=>{
 
 document.querySelectorAll(".titleBox").forEach(div=>{
   div.classList.remove("titleBox");
+  div.classList.add("simple");
+});
+document.querySelectorAll(".imgBox").forEach(div=>{
+  div.classList.remove("imgBox");
   div.classList.add("simple");
 });
 if(document.querySelector(".capa").src.length==0){
@@ -257,5 +308,19 @@ toSee=false;
     document.querySelector(".comandos").style.display="flex";
     toSee=true;
 
+}
+}
+
+function addIMG(){
+    if (vT3){
+document.querySelector("#addIMG").style.display="none";
+vT3=false;
+    }else{
+    document.querySelector("#addIMG").style.display="flex";
+    vT3=true;
+    document.querySelector("#addTitle").style.display="none";
+vT=false;
+document.querySelector("#addText").style.display="none";
+vT2=false;
 }
 }

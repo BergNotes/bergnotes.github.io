@@ -91,13 +91,20 @@ body{
 }
 
 /* TITULOS E TEXTOS */
-.titleBox, .textBox{
+.titleBox, .textBox, .imgBox{
     background:white;
     border-radius:10px;
     padding:20px;
     /*box-shadow:0 2px 10px rgba(0,0,0,0.08);*/
     position:relative;
 }
+.img{
+    margin:auto;
+    width:300px;
+    height:300px;
+
+}
+
 
 .simple{
     padding:20px;
@@ -135,7 +142,7 @@ body{
 }
 
 /* MODAIS */
-#addTitle, #addText{
+#addTitle, #addText, #addIMG{
     padding:20px;
     width:320px;
     background:white;
@@ -160,7 +167,7 @@ body{
 }
 
 #addTitle button,
-#addText button{
+#addText button, #addIMG button{
     padding:10px;
     background:#2f6fb0;
     color:white;
@@ -235,4 +242,17 @@ li{
 }
 .c{
     font-weight:bold;
+}
+
+@media (max-width: 768px) {
+.capa{
+    min-width:300px;
+    height:510px;
+    display:none;
+}
+}
+.header img{
+    width:20px;
+    height:20px;
+    
 }

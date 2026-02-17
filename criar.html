@@ -11,6 +11,8 @@
 <body>
     <div class="comandos">
         <ul>
+            <li><span class="c">\f</span> texto <span class="c">\f</span>.<br><br>
+                Ex: \f Olá \f, tudo bem? = <strong>Olá</strong>, tudo bem?</li>
         <li><span class="c">\rad</span> - raíz ( √ )</li>
         <li><span class="c">\div</span> - divisão ( ÷ )</li>
         <li><span class="c">\uniao</span> - união de conjuntos ( ∪ ).</li>
@@ -33,11 +35,18 @@
         
         <button onclick="publishText()" class="btn">Adicionar</button>
     </div>
+    <div id="addIMG">
+    <label id="avisoImagem">Adicione a Imagem</label>
+    <input type="file" id="img" accept="image/*">
+    <button onclick="publishImage()" class="btn">Adicionar</button>
+</div>
+
 
     <div class="tudo">
     <div class="header">
-        <button onclick="addTitle()">Texto Forte</button>
-        <button onclick="addText()">Texto Normal</button>
+        <button onclick="addTitle()"><img src="T.png"></button>
+        <button onclick="addText()" id="sp"><img src="t.png"></button>
+        <button onclick="addIMG()"><img src="img.png"></button>
         <button id="convs">Desativar Conversão de Texto</button>
         <button id="seeAs" style="display:none">Previsualizar</button>
         <button onclick="ver()">Ver Comandos</button>
@@ -54,7 +63,7 @@
     <div id="capaCNT">
         <label>
             <span>Clique aqui para adicionar uma capa</span>
-            <input type="file" accept="image/*" name="imagem">
+            <input type="file" accept="image/*" name="imagem" id="imagem">
         </label>
     </div>
 
