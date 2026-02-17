@@ -275,10 +275,23 @@ async function gerarPDF() {
 
 async function gerar(){
   
+  
+
+let titulos=document.querySelectorAll(".titleBox");
+let textos=document.querySelectorAll(".textBox");
+let imagens=document.querySelectorAll(".imgBox");
+
+if ((titulos.length==0) && (textos.length==0) && (imagens.length==0)){
+  alert("Não pode imprimir sem conteúdo.")
+  return;
+}else if(textos.length > 2){
+  document.querySelector("#watermark").style.display="block";
+}
+
 document.querySelectorAll(".textBox").forEach(div=>{
   div.classList.remove("textBox");
   div.classList.add("simple");
-})
+});
 
 document.querySelectorAll(".titleBox").forEach(div=>{
   div.classList.remove("titleBox");
@@ -309,6 +322,7 @@ toSee=false;
     toSee=true;
 
 }
+
 }
 
 function addIMG(){
