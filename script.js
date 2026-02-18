@@ -19,7 +19,7 @@ document.querySelector("#addIMG").style.display="none";
 }
 }
 
-
+var th;
 function addText(){
     if (vT2){
 document.querySelector("#addText").style.display="none";
@@ -85,11 +85,9 @@ txt = txt.replace(/\\inter\b/g, "∩");
   });
 
   // 3️⃣ Frações: (num)/(num) ou num/num
- txt = txt.replace(/(\(?\d+\)?)[\/\\](\(?\d+\)?)/g, (_, num, den) => {
-  const n = [...num.replace(/[()]/g,"")].map(x => sup[x] || x).join("");
-  const d = [...den.replace(/[()]/g,"")].map(x => sub[x] || x).join("");
-  return n + "⁄" + d;
-});
+
+
+
 
 this.value = txt;
 
@@ -191,6 +189,13 @@ this.parentElement.remove();
     div.classList.add("textBox");
     p.classList.add("text")
     p.innerHTML=escapeHTML(Title.value).replace(/\\f(.*?)\\f/g, "<strong>$1</strong>");
+    txt = p.innerHTML.replace(/(\([^)]+\)|\w+)[\/\\](\([^)]+\)|\w+)/g, (_, num, den) => {
+  // Mantém parênteses no numerador
+  let n = num.startsWith("(") && num.endsWith(")") ? num : [...num].map(x => sup[x]||x).join("");
+  let d = den.startsWith("(") && den.endsWith(")") ? den : [...den].map(x => sub[x]||x).join("");
+  return `<span class="frac"><span class="num">${n}</span><span class="den">${d}</span></span>`;
+});
+p.innerHTML=txt;
     div.appendChild(btn);
     div.appendChild(p);
     document.querySelector(".container").appendChild(div);
