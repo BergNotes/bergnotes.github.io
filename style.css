@@ -285,3 +285,19 @@ li{
     border:1px solid #2f6fb0;
     border-radius:10px;
 }
+.frac {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.frac .num {
+  display: block;
+  border-bottom: 1px solid black;
+  padding: 0 0.2em;
+}
+
+.frac .den {
+  display: block;
+  padding: 0 0.2em;
+}
