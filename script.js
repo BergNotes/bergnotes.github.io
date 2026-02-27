@@ -293,7 +293,7 @@ let imagens=document.querySelectorAll(".imgBox");
 if ((titulos.length==0) && (textos.length==0) && (imagens.length==0)){
   alert("Não pode imprimir sem conteúdo.")
   return;
-}else if(titulos.length >= 2){
+}else if(titulos.length >= 1){
   document.querySelector("#watermark").style.display="block";
 }
 
