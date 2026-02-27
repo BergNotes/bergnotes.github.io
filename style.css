@@ -275,6 +275,7 @@ li{
     border-bottom:1px solid #2f6fb0;
     position:sticky;
     top:0px;
+    z-index: 10;
     }
 .footer a{
     color:white;

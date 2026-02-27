@@ -35,10 +35,14 @@ document.querySelector("#addIMG").style.display="none";
 }
 
 function escapeHTML(str) {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+  str=str.replace(/<br\s*\/?>/g, "%%BR%%") 
+  .replace(/&/g, "&amp;")
+  .replace(/</g, "&lt;")
+  .replace(/>/g, "&gt;")
+  .replace(/%%BR%%/g, "<br>")
+  .replace(/\n/g, "<br>");
+  console.log(str);
+  return str;
 }
 
 const sup = { "0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹" };
@@ -188,7 +192,7 @@ this.parentElement.remove();
     btn.classList.add("rmv");
     div.classList.add("textBox");
     p.classList.add("text")
-    p.innerHTML=escapeHTML(Title.value).replace(/\\f(.*?)\\f/g, "<strong>$1</strong>");
+    p.innerHTML=escapeHTML(Title.value).replace(/\*(.*?)\*/g, "<strong>$1</strong>");
     txt = p.innerHTML.replace(/(\([^)]+\)|\w+)[\/\\](\([^)]+\)|\w+)/g, (_, num, den) => {
   // Mantém parênteses no numerador
   let n = num.startsWith("(") && num.endsWith(")") ? num : [...num].map(x => sup[x]||x).join("");
@@ -274,7 +278,7 @@ async function gerarPDF() {
     heightLeft -= pageHeight;
   }
 
-  pdf.save("documento.pdf");
+  pdf.save("documento_by_BergNotes.pdf");
 }
 
 
@@ -289,7 +293,7 @@ let imagens=document.querySelectorAll(".imgBox");
 if ((titulos.length==0) && (textos.length==0) && (imagens.length==0)){
   alert("Não pode imprimir sem conteúdo.")
   return;
-}else if(textos.length > 2){
+}else if(titulos.length >= 2){
   document.querySelector("#watermark").style.display="block";
 }
 
